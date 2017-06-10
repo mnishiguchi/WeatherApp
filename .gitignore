@@ -21,7 +21,10 @@ out/
 # Gradle files
 .gradle
 .gradle/
+gradlew.bat
+gradlew
 build/
+gradle.properties
 
 # Signing files
 .signing/
@@ -60,6 +63,8 @@ obj/
 *.iml
 *.iws
 /out/
+.idea/tasks.xml
+.idea
 
 # User-specific configurations
 .idea/libraries/
