@@ -34,3 +34,8 @@ easier without adding another third party library.
 - Use the names of the properties that are exactly the same as those in the json response.
 - [gson](https://github.com/google/gson): A Java serialization/deserialization library to convert Java Objects into JSON and back
 
+## Loading images
+
+> The simplest way to load an image is by making use of an image loader library.
+
+- [square/picasso](http://square.github.io/picasso/): A powerful image downloading and caching library for Android

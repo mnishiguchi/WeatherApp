@@ -6,10 +6,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.mnishiguchi.weatherapp.R
 import com.mnishiguchi.weatherapp.domain.commands.RequestForecastCommand
+import com.mnishiguchi.weatherapp.domain.model.Forecast
 import com.mnishiguchi.weatherapp.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
-import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
@@ -27,8 +28,12 @@ class MainActivity : AppCompatActivity() {
 
             // Return to the main thread
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result)
-                longToast("Request performed")
+                forecastList.adapter = ForecastListAdapter(result,
+                                        object: ForecastListAdapter.OnItemClickListener {
+                                            override fun invoke(forecast: Forecast) {
+                                                toast(forecast.date)
+                                            }
+                                         })
             }
         }
     }
