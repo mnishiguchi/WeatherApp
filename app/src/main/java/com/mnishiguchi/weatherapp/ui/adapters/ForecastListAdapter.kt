@@ -1,7 +1,6 @@
 package com.mnishiguchi.weatherapp.ui.adapters
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,6 +9,7 @@ import com.mnishiguchi.weatherapp.R
 import com.mnishiguchi.weatherapp.domain.model.Forecast
 import com.mnishiguchi.weatherapp.domain.model.ForecastList
 import com.mnishiguchi.weatherapp.ui.utils.ctx
+import com.mnishiguchi.weatherapp.ui.utils.inflate
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.find
 
@@ -18,9 +18,7 @@ class ForecastListAdapter(val forecastList: ForecastList, val itemClick: (Foreca
         : RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.ctx)
-                    .inflate(R.layout.item_forecast, parent, false)
-
+        val view = parent.inflate(R.layout.item_forecast)
         return ViewHolder(view, itemClick)
     }
 
