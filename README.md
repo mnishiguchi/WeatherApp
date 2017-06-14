@@ -13,6 +13,15 @@ This app is an exercise from [Kotlin for Android Developers by Antonio Leiva](ht
 - main purpose: the generation of UI layouts by using code instead of XML
 - provides helpful functions and properties that reduce boilerplate.
 
+## Kotlin Android Extensions
+
+- The plugin automatically creates a set of properties that give direct access to all the views in the XML.
+    + The name of a property is taken from the id so make sure that ids are appropriate for a Kotlin variable.
+    + The type of a property is also taken from the XML tag.
+- [https://kotlinlang.org/docs/tutorials/android-plugin.html](https://kotlinlang.org/docs/tutorials/android-plugin.html)
+- [https://antonioleiva.com/kotlin-android-extensions/](https://antonioleiva.com/kotlin-android-extensions/)
+
+
 ## RecyclerView
 
 - [RecyclerView in Android: The basics](https://antonioleiva.com/recyclerview/)
