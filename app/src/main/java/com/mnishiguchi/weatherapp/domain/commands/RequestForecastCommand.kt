@@ -1,6 +1,6 @@
 package com.mnishiguchi.weatherapp.domain.commands
 
-import com.mnishiguchi.weatherapp.data.ForecastRequest
+import com.mnishiguchi.weatherapp.data.server.ForecastRequest
 import com.mnishiguchi.weatherapp.domain.mappers.ForecastDataMapper
 import com.mnishiguchi.weatherapp.domain.model.ForecastList
 

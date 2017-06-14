@@ -12,6 +12,7 @@ This app is an exercise from [Kotlin for Android Developers by Antonio Leiva](ht
 
 - main purpose: the generation of UI layouts by using code instead of XML
 - provides helpful functions and properties that reduce boilerplate.
+    + [Anko SQLite](https://github.com/Kotlin/anko/wiki/Anko-SQLite)
 
 ## Kotlin Android Extensions
 

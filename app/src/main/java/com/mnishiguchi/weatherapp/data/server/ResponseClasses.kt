@@ -1,4 +1,4 @@
-package com.mnishiguchi.weatherapp.data
+package com.mnishiguchi.weatherapp.data.server
 
 // The data models that represent json result from OpenWeatherMap API. https://openweathermap.org/forecast5#JSON
 // The properties must have the same name as the ones in the json.

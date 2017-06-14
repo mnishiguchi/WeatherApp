@@ -1,4 +1,4 @@
-package com.mnishiguchi.weatherapp.data
+package com.mnishiguchi.weatherapp.data.server
 
 import com.google.gson.Gson
 import java.net.URL
@@ -11,7 +11,7 @@ class ForecastRequest(val zipCode: String) {
         private val API_KEY = "15646a06818f61f7b8d7823ca833e1ce"
 
         private fun apiUrl(zipCode: String): String {
-            return "$BASE_URL?APPID=$API_KEY&q=$zipCode&mode=json&units=imperial&cnt=7"
+            return "${BASE_URL}?APPID=${API_KEY}&q=$zipCode&mode=json&units=imperial&cnt=7"
         }
     }
 

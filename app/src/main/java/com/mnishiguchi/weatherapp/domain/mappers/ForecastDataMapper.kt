@@ -1,7 +1,7 @@
 package com.mnishiguchi.weatherapp.domain.mappers
 
-import com.mnishiguchi.weatherapp.data.Forecast
-import com.mnishiguchi.weatherapp.data.ForecastResult
+import com.mnishiguchi.weatherapp.data.server.Forecast
+import com.mnishiguchi.weatherapp.data.server.ForecastResult
 import com.mnishiguchi.weatherapp.domain.model.ForecastList
 import java.text.DateFormat
 import java.util.*
