@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
 
         // Execute code in another thread
         doAsync {
-            val result = RequestForecastCommand("20001").execute()
+            val result = RequestForecastCommand(20001).execute()
 
             // Return to the main thread
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result) { toast(it.date) }
+                forecastList.adapter = ForecastListAdapter(result, { toast(it.description) })
             }
         }
     }

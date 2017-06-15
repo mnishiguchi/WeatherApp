@@ -1,4 +1,4 @@
-package com.mnishiguchi.weatherapp.ui.utils
+package com.mnishiguchi.weatherapp.extensions
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,8 +1,9 @@
-package com.mnishiguchi.weatherapp.domain.model
+package com.mnishiguchi.weatherapp.domain
 
-// The domain models that correspond to Forecast Result data
+// The domain models that correspond to Forecast Result data.
 
-data class ForecastList(val city: String,
+data class ForecastList(val id: Long,
+                        val city: String,
                         val country: String,
                         val dailyForecast: List<Forecast>) {
 
@@ -14,10 +15,10 @@ data class ForecastList(val city: String,
 
     // a[i]	=> a.get(i)
     // https://kotlinlang.org/docs/reference/operator-overloading.html#indexed
-    operator fun get(position: Int): Forecast = dailyForecast[position]
+    operator fun get(position: Int) = dailyForecast[position]
 }
 
-data class Forecast(val date: String,
+data class Forecast(val date: Long,
                     val description: String,
                     val high: Int,
                     val low: Int,

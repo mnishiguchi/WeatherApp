@@ -1,15 +1,16 @@
 package com.mnishiguchi.weatherapp.domain.commands
 
 import com.mnishiguchi.weatherapp.data.server.ForecastRequest
-import com.mnishiguchi.weatherapp.domain.mappers.ForecastDataMapper
-import com.mnishiguchi.weatherapp.domain.model.ForecastList
+import com.mnishiguchi.weatherapp.data.server.ForecastDataMapper
+import com.mnishiguchi.weatherapp.domain.ForecastList
 
 /**
  * A command that requests the forecasts to the API and convert it to domain classes.
  */
-class RequestForecastCommand(private val zipCode: String) : Command<ForecastList> {
+class RequestForecastCommand(private val zipCode: Long) : Command<ForecastList> {
+
     override fun execute(): ForecastList {
         val forecastRequest = ForecastRequest(zipCode)
-        return ForecastDataMapper().convertFromDataModel(forecastRequest.execute())
+        return ForecastDataMapper().toDomain(zipCode, forecastRequest.execute())
     }
 }

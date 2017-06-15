@@ -23,31 +23,29 @@ class DbHelper(ctx: Context = App.instance)
         val DB_NAME = "WeatherApp.db"
         val DB_VERSION = 1
 
-        // The object won’t be created until it’s used.
+        // The object won't be created until it's used.
         val instance by lazy { DbHelper() }
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.createTable(
-                ForecastCityTable.NAME, true,
-                ForecastCityTable.ID to INTEGER + PRIMARY_KEY,
-                ForecastCityTable.CITY to TEXT,
-                ForecastCityTable.COUNTRY to TEXT)
+        db.createTable(LocationEntity.TABLE_NAME, true,
+                LocationEntity.ID      to INTEGER + PRIMARY_KEY,
+                LocationEntity.CITY    to TEXT,
+                LocationEntity.COUNTRY to TEXT)
 
-        db.createTable(
-                ForecastDayTable.NAME, true,
-                ForecastDayTable.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-                ForecastDayTable.DATE to INTEGER,
-                ForecastDayTable.DESCRIPTION to TEXT,
-                ForecastDayTable.HIGH to INTEGER,
-                ForecastDayTable.LOW to INTEGER,
-                ForecastDayTable.ICON_URL to TEXT,
-                ForecastDayTable.CITY_ID to INTEGER)
+        db.createTable(ForecastEntity.TABLE_NAME, true,
+                ForecastEntity.ID          to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+                ForecastEntity.DATE        to INTEGER,
+                ForecastEntity.DESCRIPTION to TEXT,
+                ForecastEntity.HIGH        to INTEGER,
+                ForecastEntity.LOW         to INTEGER,
+                ForecastEntity.ICON_URL    to TEXT,
+                ForecastEntity.LOCATION_ID to INTEGER)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.dropTable(ForecastCityTable.NAME, true)
-        db.dropTable(ForecastDayTable.NAME, true)
+        db.dropTable(LocationEntity.TABLE_NAME, true)
+        db.dropTable(ForecastEntity.TABLE_NAME, true)
         onCreate(db)
     }
 }

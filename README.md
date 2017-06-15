@@ -49,3 +49,9 @@ easier without adding another third party library.
 > The simplest way to load an image is by making use of an image loader library.
 
 - [square/picasso](http://square.github.io/picasso/): A powerful image downloading and caching library for Android
+
+## Log
+
+```
+Log.d(javaClass.simpleName, url)
+```
