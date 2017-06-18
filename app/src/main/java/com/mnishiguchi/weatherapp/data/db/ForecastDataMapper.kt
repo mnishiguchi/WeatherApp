@@ -12,7 +12,7 @@ class ForecastDataMapper {
      * domain model => db entity
      */
 
-    fun fromDomain(forecastList: ForecastList) = with(forecastList) {
+    fun cityEntityFromDomain(forecastList: ForecastList) = with(forecastList) {
         CityEntity(
                 id,
                 city,
@@ -34,7 +34,7 @@ class ForecastDataMapper {
      * db entity => domain model
      */
 
-    fun toDomain(cityEntity: CityEntity) = with(cityEntity) {
+    fun cityEntityToDomain(cityEntity: CityEntity) = with(cityEntity) {
         ForecastList(
                 _id,
                 city,
@@ -42,8 +42,9 @@ class ForecastDataMapper {
                 dailyForecast.map { forecastEntityToDomain(it) })
     }
 
-    private fun forecastEntityToDomain(forecastEntity: ForecastEntity) = with(forecastEntity) {
+    fun forecastEntityToDomain(forecastEntity: ForecastEntity) = with(forecastEntity) {
         Forecast(
+                _id,
                 date,
                 description,
                 high,

@@ -1,11 +1,9 @@
 package com.mnishiguchi.weatherapp.data.db
 
+import com.mnishiguchi.weatherapp.domain.Forecast
 import com.mnishiguchi.weatherapp.domain.ForecastList
 import com.mnishiguchi.weatherapp.domain.providers.ForecastProvider
-import com.mnishiguchi.weatherapp.extensions.clear
-import com.mnishiguchi.weatherapp.extensions.parseList
-import com.mnishiguchi.weatherapp.extensions.parseOpt
-import com.mnishiguchi.weatherapp.extensions.toVarargArray
+import com.mnishiguchi.weatherapp.extensions.*
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
@@ -16,24 +14,30 @@ class ForecastDao(val dbHelper: DbHelper = DbHelper.instance,
                   val forecastDataMapper: ForecastDataMapper = ForecastDataMapper())
     : ForecastProvider.DataSource {
 
-    override fun forecastList(locationId: Long, date: Long) = dbHelper.use {
+    override fun forecastList(zipCode: Long, date: Long) = dbHelper.use {
 
         val dailyForecast =
                 select(ForecastEntity.TABLE_NAME)
-                .whereArgs(
-                        "${ForecastEntity.CITY_ID} = {cityId} AND ${ForecastEntity.DATE} >= {date}",
-                        "cityId" to locationId,
-                        "date"       to date)
+                .whereSimple(
+                        "${ForecastEntity.CITY_ID} = ? AND ${ForecastEntity.DATE} >= ?",
+                        zipCode.toString(),date.toString())
                 .parseList { ForecastEntity(HashMap(it)) }
 
-        val location =
+        val city =
                 select(CityEntity.TABLE_NAME)
-                .whereArgs(
-                        "${CityEntity.ID} = {cityId}",
-                        "cityId" to locationId)
+                .whereSimple("${CityEntity.ID} = ?", zipCode.toString())
                 .parseOpt { CityEntity(HashMap(it), dailyForecast) }
 
-        if (location != null) forecastDataMapper.toDomain(location) else null
+        if (city != null) forecastDataMapper.cityEntityToDomain(city) else null
+    }
+
+    override fun forecast(id: Long): Forecast? = dbHelper.use {
+
+        val forecast =
+                select(ForecastEntity.TABLE_NAME).byId(id)
+                .parseOpt { ForecastEntity(HashMap(it)) }
+
+        if (forecast != null) forecastDataMapper.forecastEntityToDomain(forecast) else null
     }
 
     fun saveForecastList(forecast: ForecastList) = dbHelper.use {
@@ -41,7 +45,7 @@ class ForecastDao(val dbHelper: DbHelper = DbHelper.instance,
         clear(CityEntity.TABLE_NAME)
         clear(ForecastEntity.TABLE_NAME)
 
-        with(forecastDataMapper.fromDomain(forecast)) {
+        with(forecastDataMapper.cityEntityFromDomain(forecast)) {
             insert(CityEntity.TABLE_NAME, *map.toVarargArray())
 
             dailyForecast.forEach {

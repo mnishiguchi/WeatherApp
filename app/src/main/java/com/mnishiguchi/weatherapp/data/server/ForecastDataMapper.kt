@@ -33,6 +33,7 @@ class ForecastDataMapper {
 
     private fun forecastToDomain(forecast: ServerForecast) = with(forecast) {
         DomainForecast(
+                -1,
                 dt,
                 weather[0].description,
                 temp.max.toInt(),

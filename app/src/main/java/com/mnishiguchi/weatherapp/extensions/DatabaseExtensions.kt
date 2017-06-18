@@ -5,7 +5,6 @@ import org.jetbrains.anko.db.MapRowParser
 import org.jetbrains.anko.db.SelectQueryBuilder
 
 /**
- * TODO: Understand how it works
  * Parses a query result that is expected to be a collection, using the passed-in parser.
  */
 fun <T : Any> SelectQueryBuilder.parseList(parser: (Map<String, Any?>) -> T): List<T> {
@@ -19,7 +18,6 @@ fun <T : Any> SelectQueryBuilder.parseList(parser: (Map<String, Any?>) -> T): Li
 }
 
 /**
- * TODO: Understand how it works
  * Parses a query result that is expected to be a single object or null, using the passed-in parser.
  */
 fun <T: Any> SelectQueryBuilder.parseOpt(parser: (Map<String, Any?>) -> T): T? {
@@ -31,6 +29,11 @@ fun <T: Any> SelectQueryBuilder.parseOpt(parser: (Map<String, Any?>) -> T): T? {
     })
 }
 
+fun SelectQueryBuilder.byId(id: Long): SelectQueryBuilder {
+    return whereSimple("_id = ?", id.toString())
+}
+
 fun SQLiteDatabase.clear(tableName: String) {
     execSQL("delete from $tableName")
 }
+

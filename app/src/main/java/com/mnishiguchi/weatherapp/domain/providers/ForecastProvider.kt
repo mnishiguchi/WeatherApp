@@ -2,12 +2,11 @@ package com.mnishiguchi.weatherapp.domain.providers
 
 import com.mnishiguchi.weatherapp.data.db.ForecastDao
 import com.mnishiguchi.weatherapp.data.server.ForecastServer
+import com.mnishiguchi.weatherapp.domain.Forecast
 import com.mnishiguchi.weatherapp.domain.ForecastList
 import com.mnishiguchi.weatherapp.extensions.firstResult
 
 /**
- * TODO - Understand and refactor
- *
  * Workflow:
  * - Request the data from the database
  * - Check if there is data for the corresponding week
@@ -21,6 +20,19 @@ import com.mnishiguchi.weatherapp.extensions.firstResult
  */
 class ForecastProvider(val sources: List<DataSource> = ForecastProvider.SOURCES) {
 
+    interface DataSource {
+        /**
+         * @param zipCode
+         * @param date a unix timestamp
+         */
+        fun forecastList(zipCode: Long, date: Long): ForecastList?
+
+        /**
+         * @param id
+         */
+        fun forecast(id: Long): Forecast?
+    }
+
     companion object {
         val DAY_IN_MILLIS = 1000 * 60 * 60 * 24
 
@@ -28,26 +40,21 @@ class ForecastProvider(val sources: List<DataSource> = ForecastProvider.SOURCES)
         val SOURCES = listOf(ForecastDao(), ForecastServer())
     }
 
-    fun findByZipCodeAndDays(zipCode: Long, numberOfDays: Int): ForecastList {
+    fun findByZipCode(zipCode: Long, numberOfDays: Int): ForecastList {
+        return requestToSources {
+            val response = it.forecastList(zipCode, todayTimeSpan())
+            if (response != null && response.size >= numberOfDays) response else null
+        }
+    }
 
-        // Get the first non-null result from the sources.
-        return sources.firstResult { requestSource(it, numberOfDays, zipCode) }
+
+    fun findById(id: Long): Forecast {
+        return requestToSources {
+            it.forecast(id)
+        }
     }
 
     /**
-     * Only returns a value if the result is not null and the number of days matches the parameter.
-     * Otherwise, the source does not have enough up-to-date data to return a successful result.
-     */
-    private fun requestSource(source: DataSource, numberOfDays: Int, zipCode: Long)
-            : ForecastList? {
-
-        val response = source.forecastList(zipCode, todayTimeSpan())
-
-        return if (response != null && response.size >= numberOfDays) response else null
-    }
-
-    /**
-     * TODO - what does this exactly do?
      * Calculates the time in milliseconds for the current day,
      * The database need it. The server does not need it because today is the default date.
      */
@@ -57,12 +64,11 @@ class ForecastProvider(val sources: List<DataSource> = ForecastProvider.SOURCES)
         return System.currentTimeMillis() / DAY_IN_MILLIS * DAY_IN_MILLIS
     }
 
-    interface DataSource {
-
-        /**
-         * @param zipCode
-         * @param date a unix timestamp
-         */
-        fun forecastList(zipCode: Long, date: Long): ForecastList?
+    /**
+     * Returns the first non-null result.
+     */
+    private fun <T : Any> requestToSources(f: (ForecastProvider.DataSource) -> T?): T {
+        return sources.firstResult { f(it) }
     }
+
 }

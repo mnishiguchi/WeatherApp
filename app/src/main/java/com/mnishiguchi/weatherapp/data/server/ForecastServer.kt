@@ -25,4 +25,13 @@ class ForecastServer(val forecastDataMapper: ForecastDataMapper = ForecastDataMa
         // Returns the values from the database because we need the row ids.
         return forecastDao.forecastList(zipCode, date)
     }
+
+    /**
+     * ForecastServer will never use this function because the info will be always cached
+     * in the database. So if this function is invoked, something must be wrong.
+     */
+    override fun forecast(id: Long): Nothing {
+        throw UnsupportedOperationException()
+    }
+
 }

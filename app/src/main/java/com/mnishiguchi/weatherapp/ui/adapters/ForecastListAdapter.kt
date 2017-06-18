@@ -8,10 +8,9 @@ import com.mnishiguchi.weatherapp.domain.Forecast
 import com.mnishiguchi.weatherapp.domain.ForecastList
 import com.mnishiguchi.weatherapp.extensions.ctx
 import com.mnishiguchi.weatherapp.extensions.inflate
+import com.mnishiguchi.weatherapp.extensions.toDateString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
-import java.text.DateFormat
-import java.util.*
 
 // When a function accept an interface with a single function, it can be substituted by a lambda.
 class ForecastListAdapter(val forecastList: ForecastList, val itemClick: (Forecast) -> Unit)
@@ -37,17 +36,12 @@ class ForecastListAdapter(val forecastList: ForecastList, val itemClick: (Foreca
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
                 Picasso.with(itemView.ctx).load(iconUrl).into(itemView.icon)
-                itemView.date.text = convertDate(date)
+                itemView.date.text = date.toDateString()
                 itemView.description.text = description
                 itemView.maxTemperature.text = "$high"
                 itemView.minTemperature.text = "$low"
                 itemView.setOnClickListener { itemClick(this) }
             }
-        }
-
-        private fun convertDate(date: Long): String {
-            val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
-            return df.format(date)
         }
     }
 }
