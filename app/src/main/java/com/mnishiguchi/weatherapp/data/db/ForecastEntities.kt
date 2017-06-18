@@ -14,20 +14,22 @@ package com.mnishiguchi.weatherapp.data.db
   + An empty map will be filled with passed-in properties automatically by delegation.
  */
 
-class LocationEntity(val map: MutableMap<String, Any?>,
-                     val dailyForecast: List<ForecastEntity>) {
+class CityEntity(val map: MutableMap<String, Any?>,
+                 val dailyForecast: List<ForecastEntity>) {
 
     companion object {
-        val TABLE_NAME = "location"
+        val TABLE_NAME = "city"
         val ID = "_id"
         val CITY = "city"
         val COUNTRY = "country"
     }
 
+    // For converting database to domain
     var _id: Long by map
     var city: String by map
     var country: String by map
 
+    // For converting domain to database
     constructor(id: Long,
                 city: String,
                 country: String,
@@ -50,17 +52,19 @@ class ForecastEntity(var map: MutableMap<String, Any?>) {
         val HIGH = "high"
         val LOW = "low"
         val ICON_URL = "iconUrl"
-        val LOCATION_ID = "locationId"
+        val CITY_ID = "cityId"
     }
 
+    // For converting database to domain
     var _id: Long by map
     var date: Long by map
     var description: String by map
     var high: Int by map
     var low: Int by map
     var iconUrl: String by map
-    var locationId: Long by map
+    var cityId: Long by map
 
+    // For converting domain to database
     constructor(date: Long,
                 description: String,
                 high: Int,
@@ -74,6 +78,6 @@ class ForecastEntity(var map: MutableMap<String, Any?>) {
         this.high = high
         this.low = low
         this.iconUrl = iconUrl
-        this.locationId = locationId
+        this.cityId = locationId
     }
 }

@@ -6,7 +6,7 @@ import com.mnishiguchi.weatherapp.ui.App
 import org.jetbrains.anko.db.*
 
 /**
- * A db helper that is powered by Anko.
+ * A db helper singleton that handles all the low-level database operations for us.
  * ---
  * Usage:
  *     val result = dbHelper.use {
@@ -28,11 +28,13 @@ class DbHelper(ctx: Context = App.instance)
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.createTable(LocationEntity.TABLE_NAME, true,
-                LocationEntity.ID      to INTEGER + PRIMARY_KEY,
-                LocationEntity.CITY    to TEXT,
-                LocationEntity.COUNTRY to TEXT)
+        db.createTable(CityEntity.TABLE_NAME, true,
+                CityEntity.ID      to INTEGER + PRIMARY_KEY,
+                CityEntity.CITY    to TEXT,
+                CityEntity.COUNTRY to TEXT)
 
+        // android.database.sqlite.SQLiteException: near “org”: syntax error (code 1)
+        // https://stackoverflow.com/q/44491674/3837223
         db.createTable(ForecastEntity.TABLE_NAME, true,
                 ForecastEntity.ID          to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
                 ForecastEntity.DATE        to INTEGER,
@@ -40,11 +42,11 @@ class DbHelper(ctx: Context = App.instance)
                 ForecastEntity.HIGH        to INTEGER,
                 ForecastEntity.LOW         to INTEGER,
                 ForecastEntity.ICON_URL    to TEXT,
-                ForecastEntity.LOCATION_ID to INTEGER)
+                ForecastEntity.CITY_ID     to INTEGER)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.dropTable(LocationEntity.TABLE_NAME, true)
+        db.dropTable(CityEntity.TABLE_NAME, true)
         db.dropTable(ForecastEntity.TABLE_NAME, true)
         onCreate(db)
     }
