@@ -49,9 +49,53 @@ easier without adding another third party library.
 > The simplest way to load an image is by making use of an image loader library.
 
 - [square/picasso](http://square.github.io/picasso/): A powerful image downloading and caching library for Android
-
+__
 ## Log
 
 ```
 Log.d(javaClass.simpleName, url)
 ```
+
+## Reified type paramerters
+- [https://kotlinlang.org/docs/reference/inline-functions.html#reified-type-parameters](https://kotlinlang.org/docs/reference/inline-functions.html#reified-type-parameters)
+
+> ... We qualified the type parameter with the reified modifier, now it’s accessible inside the function, almost as if it were a normal class. ...
+
+## Interfaces
+- [https://kotlinlang.org/docs/reference/interfaces.html](https://kotlinlang.org/docs/reference/interfaces.html)
+- Can declare abstract methods
+- Can implement methods
+- Stateless properties:
+  + abstract property declaration
+  + accessor implementation
+
+## Generics
+
+```kotlin
+// Any types including nullable
+class TypedClass<T>(parameter: T) {
+  val value: T = parameter
+}
+```
+
+```kotlin
+// Any non-nullable types
+class TypedClass<T : Any>(parameter: T) {
+    val value: T = parameter
+}
+```
+
+## Variance
+- `out` - to less restrictive (covariance)
+- `in` - to more restrictive (contravariance) 
+
+## Using a tool bar instead of ActionBar
+- Extend `Theme.AppCompat.Light.NoActionBar` in `app/src/main/res/values/styles.xml`.
+- Create a toolbar layout in `app/src/main/res/layout/`.
+  + theme 
+  + popupTheme
+  + background 
+  + etc
+- Add the toolbar layout to activity layouts.
+- Create a ToolbarManager interface.
+- Implement the ToolbarManager interface in activities.

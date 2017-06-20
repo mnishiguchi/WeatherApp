@@ -28,7 +28,8 @@ class ForecastDao(val dbHelper: DbHelper = DbHelper.instance,
                 .whereSimple("${CityEntity.ID} = ?", zipCode.toString())
                 .parseOpt { CityEntity(HashMap(it), dailyForecast) }
 
-        if (city != null) forecastDataMapper.cityEntityToDomain(city) else null
+        // if (city != null) forecastDataMapper.cityEntityToDomain(city) else null
+        city?.let { forecastDataMapper.cityEntityToDomain(it) }
     }
 
     override fun forecast(id: Long): Forecast? = dbHelper.use {
@@ -37,7 +38,8 @@ class ForecastDao(val dbHelper: DbHelper = DbHelper.instance,
                 select(ForecastEntity.TABLE_NAME).byId(id)
                 .parseOpt { ForecastEntity(HashMap(it)) }
 
-        if (forecast != null) forecastDataMapper.forecastEntityToDomain(forecast) else null
+        // if (forecast != null) forecastDataMapper.forecastEntityToDomain(forecast) else null
+        forecast?.let { forecastDataMapper.forecastEntityToDomain(it) }
     }
 
     fun saveForecastList(forecast: ForecastList) = dbHelper.use {
