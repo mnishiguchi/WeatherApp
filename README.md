@@ -103,3 +103,8 @@ class TypedClass<T : Any>(parameter: T) {
 ## SharedPreferences
 - A key-value store
 - [https://developer.android.com/training/basics/data-storage/shared-preferences.html](https://developer.android.com/training/basics/data-storage/shared-preferences.html)
+
+## Unit testing
+- Use JUnit library
+- Put test files in `app/src/test/java/`
+- `Ctrl` + `shift` + `R` to run tests
