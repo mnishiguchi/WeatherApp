@@ -1,4 +1,4 @@
-package com.mnishiguchi.weatherapp.extensions
+package com.mnishiguchi.weatherapp.ext
 
 import android.content.Context
 import android.support.v4.content.ContextCompat

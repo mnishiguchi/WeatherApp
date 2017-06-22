@@ -99,3 +99,7 @@ class TypedClass<T : Any>(parameter: T) {
 - Add the toolbar layout to activity layouts.
 - Create a ToolbarManager interface.
 - Implement the ToolbarManager interface in activities.
+
+## SharedPreferences
+- A key-value store
+- [https://developer.android.com/training/basics/data-storage/shared-preferences.html](https://developer.android.com/training/basics/data-storage/shared-preferences.html)

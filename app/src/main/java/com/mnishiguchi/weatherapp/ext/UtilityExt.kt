@@ -1,4 +1,4 @@
-package com.mnishiguchi.weatherapp.extensions
+package com.mnishiguchi.weatherapp.ext
 
 import java.text.DateFormat
 import java.util.*

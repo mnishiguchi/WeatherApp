@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import com.mnishiguchi.weatherapp.R
 import com.mnishiguchi.weatherapp.domain.Forecast
 import com.mnishiguchi.weatherapp.domain.ForecastList
-import com.mnishiguchi.weatherapp.extensions.ctx
-import com.mnishiguchi.weatherapp.extensions.inflate
-import com.mnishiguchi.weatherapp.extensions.toDateString
+import com.mnishiguchi.weatherapp.ext.ctx
+import com.mnishiguchi.weatherapp.ext.inflate
+import com.mnishiguchi.weatherapp.ext.toDateString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
 

@@ -4,7 +4,7 @@ import com.mnishiguchi.weatherapp.data.db.ForecastDao
 import com.mnishiguchi.weatherapp.data.server.ForecastServer
 import com.mnishiguchi.weatherapp.domain.Forecast
 import com.mnishiguchi.weatherapp.domain.ForecastList
-import com.mnishiguchi.weatherapp.extensions.firstResult
+import com.mnishiguchi.weatherapp.ext.firstResult
 
 /**
  * Workflow:

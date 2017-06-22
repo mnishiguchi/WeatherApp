@@ -1,4 +1,4 @@
-package com.mnishiguchi.weatherapp.extensions
+package com.mnishiguchi.weatherapp.ext
 
 import android.database.sqlite.SQLiteDatabase
 import org.jetbrains.anko.db.MapRowParser

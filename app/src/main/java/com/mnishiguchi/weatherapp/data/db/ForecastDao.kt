@@ -3,7 +3,7 @@ package com.mnishiguchi.weatherapp.data.db
 import com.mnishiguchi.weatherapp.domain.Forecast
 import com.mnishiguchi.weatherapp.domain.ForecastList
 import com.mnishiguchi.weatherapp.domain.providers.ForecastProvider
-import com.mnishiguchi.weatherapp.extensions.*
+import com.mnishiguchi.weatherapp.ext.*
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 

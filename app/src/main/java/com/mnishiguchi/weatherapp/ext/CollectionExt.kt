@@ -1,4 +1,4 @@
-package com.mnishiguchi.weatherapp.extensions
+package com.mnishiguchi.weatherapp.ext
 
 /**
  * Converts a map with a nullable values (a requirement of the map delegate)

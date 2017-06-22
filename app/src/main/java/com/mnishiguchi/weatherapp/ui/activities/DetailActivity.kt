@@ -7,9 +7,9 @@ import android.widget.TextView
 import com.mnishiguchi.weatherapp.R
 import com.mnishiguchi.weatherapp.domain.Forecast
 import com.mnishiguchi.weatherapp.domain.commands.RequestForecastCommand
-import com.mnishiguchi.weatherapp.extensions.color
-import com.mnishiguchi.weatherapp.extensions.textColor
-import com.mnishiguchi.weatherapp.extensions.toDateString
+import com.mnishiguchi.weatherapp.ext.color
+import com.mnishiguchi.weatherapp.ext.textColor
+import com.mnishiguchi.weatherapp.ext.toDateString
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.ctx
